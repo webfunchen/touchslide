@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<title></title>
+<head>    
+<script src="http://g.tbcdn.cn/??kissy/k/1.4.1/seed-min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="http://blog.chenpansong.cn/assets/animate.css" type="text/css">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="">
+<style type="text/css">
+*{margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+.cps_container ul,.cps_container li,body,.cps_container p,iframe,dl,dt,dd{ padding: 0; margin: 0; }
+.cps_container ul,.cps_container li{list-style-type: none}
+.cps_container img{border: 0; display: block;width:100%;}
+.cps_container a{ text-decoration: none}
+.cps_container a:hover{ text-decoration: none}   
+.cps_container{ background:#000; margin: 0 auto;min-width: 320px; max-width: 640px; position: relative ;height:auto;overflow:hidden;}
+.cps_container img{}    
+a{ blr:expression(this.onFocus=this.blur()); /* IE Opera */ outline:none; /* FF Opera */ }
+area:focus{ -moz-outline-style: none; /* FF */ }
+area{ blr:expression(this.onFocus=this.blur()); /* IE Opera */ outline:none; /* FF Opera */ }
+area:focus{ -moz-outline-style: none; /* FF */ }
+
+.main-box{width:100%;height:100%;position:relative;z-index:1;background-size:auto auto;text-align:center;overflow:hidden;background:url("http://gtms04.alicdn.com/tps/i4/TB1UDFsGXXXXXc7XXXXxPfUFXXX-16-16.gif") center no-repeat;}
+.main-box img{height:100%;display:inline-block;}
+.show{position:fixed;left:0;top:0;width:100%;height:20px;color:#fff;background:#333;height:20px;line-height:20px;text-align:center;z-index:100;}
+.box-list{position:absolute;left:10%;top:10%;font-size:20px;color:#fff;display:none;width:70%;}
+.box-list li{height:30px;line-height:30px;}
+.box-list img{height:auto;}
+.animated{display:block;}
+</style>
+</head>
+<body>
+<div class="module" data-spm="$spm_module_id">
+    <div class="cps_container">
+    	<p class="show"></p>
+		<div class="main-box box-0">
+			<img src="images/bg1.jpg">
+			<div class="box-list box0-list">
+				<img src="http://s7.mogucdn.com/pic/141118/13t2zv_ieydgy3cg44tgojzmqytambqgiyde_544x231.png">
+			</div>
+		</div>
+		<div class="main-box box-1">
+			<img data-src="images/bg2.jpg" class="lazyload">
+			<div class="box-list box1-list">
+				<img data-src="http://s7.mogucdn.com/pic/141119/13t2zv_ieydcmjymm4wmyzzmqytambqgyyde_872x295.png" class="lazyload">
+			</div>
+		</div>
+		<div class="main-box box-2">
+			<img data-src="images/bg3.jpg" class="lazyload">
+			<div class="box-list box2-list">
+				<img class="lazyload" data-src="http://s20.mogucdn.com/pic/141119/13t2zv_ieydaoddga4tamdbmqytambqhayde_950x388.png">
+			</div>
+		</div>
+		<div class="main-box box-3">
+			<img class="lazyload" data-src="images/bg4.jpg">
+			<div class="box-list box3-list">
+				<img data-src="http://s6.mogucdn.com/pic/141119/13t2zv_ieydkzbqmvrdqzjzmqytambqmmyde_904x271.png" class="lazyload">
+			</div>
+		</div>
+		<div class="main-box box-4">
+			<img data-src="images/bg5.jpg" class="lazyload">
+			<div class="box-list box4-list">
+				<img data-src="http://s8.mogucdn.com/pic/141120/13t2zv_ieydembvmzrtcmdbmqytambqmmyde_318x212.png" class="lazyload" />
+			</div>
+		</div>
+    </div>
+</div>
+<script>
+KISSY.use("node,event,ua,io",function(S,Node,Event,UA,IO){
+	var $=S.all;
+	/*配置对象*/
+	var config={
+		el:".main-box",
+		isdebug:true,
+		speed:0.5,
+		triggerdis:150,
+		isani:false,
+		eventlist:["touchstart","touchmove","touchend"],
+		log:function(a){
+	        if(config.isdebug){console.log(a);$(".show").html(a);}
+	    },
+		init:function(){
+			var _this=this;
+			$(_this.el).height($(window).height());
+			anim(0);
+		}
+	};
+	/*移动相关对象*/
+	var _move={
+		dis:0,
+		dir:0,
+		touchtime:0,
+		index:0
+	};
+	config.init();//全局初始化
+	config.log(UA.os+"||"+UA.core+"||"+UA.mobile);
+	/*如果是windows系统*/
+	if(UA.os=="windows")
+	{
+		
+	}$("html").add("body").css("overflow","auto");
+	/*每一屏初始化动画控制*/
+	function anim(index){
+		function _init(){$(".box-list").removeClass("bounceInLeft zoomOutRight zoomInDown rubberBand animated lightSpeedIn");};
+		_init();
+		switch(index){
+			case 0:$(".box0-list").addClass("bounceInLeft animated");break;
+			case 1:$(".box1-list").addClass("lightSpeedIn animated");break;
+			case 2:$(".box2-list").addClass("zoomInDown animated");break;
+			case 3:$(".box3-list").addClass("zoomOutRight animated");break;
+			case 4:$(".box4-list").addClass("rubberBand animated");break;
+			default:_init();
+		}
+	}
+	/*图片自定义懒加载,当执行new时加载对应模块的图片*/
+	var lazyload=function(obj){
+		this.con=obj.container||$("body");
+		this.nodename=obj.node||".lazyload";
+		this.init=function(){
+			var _self=this;
+			$(_self.node).css("display","none");
+			this.con.all(_self.nodename).each(function(){
+				var src=$(this).attr("data-src");
+				$(this).attr('src',src);$(this).fadeIn(0.1);
+			});
+			delete this;
+		}
+		this.init();
+	};
+	/*绑定触摸事件*/
+	var _touch={
+		touch:function(el,index){
+			var y1=0,y2=0;
+			$(el)[0].addEventListener(config.eventlist[0], function (e) {
+				/*touchstart*/
+				_move.index=index;
+				e.preventDefault(); 
+		        y1 = e.targetTouches[0].pageY;
+		        _move.dis=0;_move.dir=0;_move.touchtime+=1;
+		         //触摸开始时懒加载
+		        var lazy=new lazyload({container:$(el).next(config.el)});
+		    });
+		    $(el)[0].addEventListener(config.eventlist[2], function (e) {
+		    	/*touchend*/
+		    	if(_move.touchtime>=2){_move.touchtime=0;return false;}
+		    	e.preventDefault();_move.touchtime=0;
+		        if(_move.dis<0)
+		        {
+		        	if($(el).next(config.el))
+		        	{
+		        		if(_move.dis<-config.triggerdis)
+			        	$(el).animate({'height':0},config.speed,'easing',function(){anim(index+1);});
+			        	else
+			        	$(el).animate({'height':$(window).height()},config.speed);
+		        	}
+		        }
+		        else if(_move.dis>0)
+		        {
+		        	if($(el).prev(config.el))
+		        	{
+			        	if(_move.dis>config.triggerdis)
+			        	$(el).prev(config.el).animate({"height":$(window).height()},config.speed,'easing',function(){anim(index-1);});
+			        	else
+			        	{
+			        		$(el).prev(config.el).animate({"height":0},config.speed);
+			        		$(el).animate({'height':$(window).height()},config.speed);
+			    		}	
+		    		}
+		        }
+		    });
+		    $(el)[0].addEventListener(config.eventlist[1], function (e) {
+		    	/*touchmove*/
+		    	e.preventDefault();
+		    	config.log(_move.touchtime);
+		    	if(_move.touchtime>=2){return false;}
+		    	y2=e.changedTouches[0].pageY;
+		       	_move.dis=y2-y1;
+		       	if(_move.dis>0)
+		        {
+		        	_move.dir=1;
+		        	var per=_move.dis;
+		        	if($(el).prev(config.el))
+		       		$(el).prev(config.el).css("height",per);
+		        }
+		    	else if(_move.dis<0)
+		    	{
+		    		_move.dir=0;
+		    		var per=$(window).height()+_move.dis;
+		    		if($(el).next(config.el))
+		       		$(el).css("height",per);
+		    	}
+		    });
+		},
+		init:function(){
+			for(var i=0;i<$(config.el).length;i++)
+			{
+				this.touch(".box-"+i,i);
+			}
+		}
+	};
+	_touch.init();
+	
+	
+});
+</script>
+</body>
+</html>
